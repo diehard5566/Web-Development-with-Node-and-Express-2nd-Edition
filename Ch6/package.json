@@ -1,0 +1,19 @@
+{
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "cat-names": "^2.0.0",
+        "cookie-parser": "^1.4.4",
+        "express": "^4.16.4",
+        "express-handlebars": "^3.0.2",
+        "express-session": "^1.15.6"
+    },
+    "name": "ch6",
+    "version": "1.0.0",
+    "main": "00-echo-headers.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}
