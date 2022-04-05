@@ -12,6 +12,8 @@ app.get('/api/tours', (req, res) => {
         tours.map(p => `<tour price="${p.price}" id="${p.id}">${p.name}</tour>`).join('') +
         '</tours>'
     const toursText = tours.map(p => `${p.id}: ${p.name}(${p.price})`).join('\n')
+
+    console.log(toursXml)
     res.format({
         'application/json': () => res.json(tours),
         'application/xml': () => res.type('application/xml').send(toursXml),
