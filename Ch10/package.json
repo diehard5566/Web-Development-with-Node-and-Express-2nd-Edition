@@ -1,0 +1,22 @@
+{
+  "name": "ch10",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon 03-more-cart-validation.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "multiparty": "^4.2.3",
+    "nodemon": "^2.0.15"
+  }
+}
