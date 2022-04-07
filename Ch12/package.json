@@ -1,0 +1,19 @@
+{
+    "name": "ch12",
+    "version": "1.0.0",
+    "main": "00-logging.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "stress": "artillery quick --count 10 -n 20 http://localhost:3000/"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.3",
+        "artillery": "^1.6.0-27",
+        "jest": "^24.7.1",
+        "loadtest": "^3.0.7",
+        "morgan": "^1.9.1"
+    },
+    "description": ""
+}
