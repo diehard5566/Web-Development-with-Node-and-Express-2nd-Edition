@@ -3,7 +3,13 @@ const expressHandlebars = require('express-handlebars')
 const multiparty = require('multiparty')
 const bodyParser = require('body-parser')
 const handlers = require('./lib/handlers')
+const cookieParser = require('cookie-parser')
 const weatherMiddleware = require('./lib/middleware/weather')
+
+const expressSession = require('express-session')
+const RedisStore = require('connect-redis')(expressSession)
+
+const credentials = require('./credentials')
 
 require('./db')
 
@@ -12,7 +18,7 @@ const app = express()
 //configure Handlebars view engine
 app.engine(
     'handlebars',
-    expressHandlebars.engine({
+    expressHandlebars({
         defaultLayout: 'main',
         helpers: {
             section: function (name, options) {
@@ -27,6 +33,18 @@ app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+app.use(cookieParser(credentials.cookieSecret))
+app.use(
+    expressSession({
+        resave: false,
+        saveUninitialized: false,
+        secret: credentials.cookieSecret,
+        store: new RedisStore({
+            url: credentials.redis.url,
+        }),
+    })
+)
 
 const port = process.env.PORT || 3000
 
@@ -69,6 +87,9 @@ app.post('/api/vacation-photo-contest/:year/:month', (req, res) => {
 app.get('/vacations', handlers.listVacations)
 app.get('/notify-me-when-in-season', handlers.notifyWhenInSeasonForm)
 app.post('/notify-me-when-in-season', handlers.notifyWhenInSeasonProcess)
+
+// utility routes
+app.get('/set-currency/:currency', handlers.setCurrency)
 
 // custom 404 page
 app.use(handlers.notFound)
