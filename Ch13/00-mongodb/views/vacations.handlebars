@@ -4,7 +4,7 @@
     <h3>{{name}}</h3>
     <p>{{description}}</p>
     {{#if inSeason}}
-      <span class="price">{{price}}</span>
+      <span class="price">${{price}} USD</span>
       <a href="/cart/add?sku={{sku}}" class="btn btn-default">Buy Now!</a>
     {{else}}
       <span class="outOfSeason">We're sorry, this vacation is currently
@@ -16,3 +16,10 @@
     {{/if}}
   </div>
 {{/each}}
+
+<hr>
+<p>Currency:
+    <a href="/set-currency/USD" class="currency {{currencyUSD}}">USD</a> |
+    <a href="/set-currency/GBP" class="currency {{currencyGBP}}">GBP</a> |
+    <a href="/set-currency/BTC" class="currency {{currencyBTC}}">BTC</a>
+</p>

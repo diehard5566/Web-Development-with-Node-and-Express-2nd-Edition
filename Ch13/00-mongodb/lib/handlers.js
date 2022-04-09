@@ -93,16 +93,51 @@ exports.api.newsletterSignup = (req, res) => {
 }
 // **** end fetch/JSON form handlers
 
+exports.setCurrency = (req, res) => {
+    req.session.currency = req.params.currency
+    return res.redirect(303, '/vacations')
+}
+
+function convertFromUSD(value, currency) {
+    switch (currency) {
+        case 'USD':
+            return value * 1
+        case 'GBP':
+            return value * 0.79
+        case 'BTC':
+            return value * 0.000078
+        default:
+            return NaN
+    }
+}
+
 exports.listVacations = async (req, res) => {
     const vacations = await db.getVacations({ available: true })
+    const currency = req.session.currency || 'USD'
     const context = {
-        vacations: vacations.map(vacation => ({
-            sku: vacation.sku,
-            name: vacation.name,
-            description: vacation.description,
-            price: '$' + vacation.price.toFixed(2),
-            inSeason: vacation.inSeason,
-        })),
+        currency: currency,
+        vacations: vacations.map(vacation => {
+            return {
+                sku: vacation.sku,
+                name: vacation.name,
+                description: vacation.description,
+                inSeason: vacation.inSeason,
+                price: convertFromUSD(vacation.price, currency),
+                qty: vacation.qty,
+            }
+        }),
+    }
+    console.log(context)
+    switch (currency) {
+        case 'USD':
+            context.currencyUSD = 'selected'
+            break
+        case 'GBP':
+            context.currencyGBP = 'selected'
+            break
+        case 'BTC':
+            context.currencyBTC = 'selected'
+            break
     }
     res.render('vacations', context)
 }
