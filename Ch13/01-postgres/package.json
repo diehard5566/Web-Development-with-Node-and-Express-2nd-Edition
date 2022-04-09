@@ -1,0 +1,25 @@
+{
+    "dependencies": {
+        "body-parser": "^1.20.0",
+        "express": "^4.17.3",
+        "express-handlebars": "^6.0.3",
+        "handlebars": "^4.7.7",
+        "mongoose": "^6.2.10",
+        "multiparty": "^4.2.3",
+        "nodemon": "^2.0.15",
+        "pg": "^8.7.3"
+    },
+    "name": "ch7",
+    "version": "1.0.0",
+    "main": "meadowlark.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon meadowlark.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": ""
+}
